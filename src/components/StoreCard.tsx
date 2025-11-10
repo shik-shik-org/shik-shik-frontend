@@ -12,7 +12,7 @@ export const StoreCard = ({ store }: StoreCardProps) => {
   const hours = formatHours(store.hours);
 
   return (
-    <Card className="hover:shadow-lg transition-all duration-300 hover:border-primary/20 h-full flex flex-col">
+    <Card className="hover:shadow-lg transition-all duration-300 hover:border-primary/30 hover:shadow-primary/10 h-full flex flex-col bg-card/80 backdrop-blur-sm">
       <CardHeader className="pb-3">
         <CardTitle className="text-lg text-foreground leading-tight">{store.name}</CardTitle>
       </CardHeader>
