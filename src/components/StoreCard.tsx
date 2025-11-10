@@ -12,56 +12,61 @@ export const StoreCard = ({ store }: StoreCardProps) => {
   const hours = formatHours(store.hours);
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
-      <CardHeader>
-        <CardTitle className="text-lg text-foreground">{store.name}</CardTitle>
+    <Card className="hover:shadow-lg transition-all duration-300 hover:border-primary/20 h-full flex flex-col">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-lg text-foreground leading-tight">{store.name}</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex items-start gap-2 text-sm">
-          <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-          <span className="text-foreground">{store.address}</span>
-        </div>
-
-        <div className="flex items-center gap-2 text-sm">
-          <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-          <a href={`tel:${store.phone}`} className="text-foreground hover:text-primary transition-colors">
-            {store.phone}
-          </a>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-            <Clock className="w-4 h-4 text-primary" />
-            <span>Работно време</span>
+      <CardContent className="space-y-4 flex-1 flex flex-col">
+        <div className="space-y-3 flex-1">
+          <div className="flex items-start gap-3 text-sm">
+            <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+            <span className="text-foreground leading-relaxed">{store.address}</span>
           </div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs pl-6">
-            {hours.map((h, idx) => (
-              <div key={idx} className="flex justify-between">
-                <span className="text-muted-foreground">{h.day}</span>
-                <span className="text-foreground font-medium">{h.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {store.new_stock && (
-          <div className="flex items-start gap-2 text-sm bg-accent p-3 rounded-md">
-            <Package className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-            <div>
-              <div className="font-medium text-accent-foreground">Нова стока</div>
-              <div className="text-accent-foreground">{store.new_stock}</div>
+          <div className="flex items-center gap-3 text-sm">
+            <Phone className="w-4 h-4 text-primary flex-shrink-0" />
+            <a href={`tel:${store.phone}`} className="text-foreground hover:text-primary transition-colors font-medium">
+              {store.phone}
+            </a>
+          </div>
+
+          <div className="space-y-2 pt-2">
+            <div className="flex items-center gap-2 text-sm font-semibold text-foreground border-b border-border pb-2">
+              <Clock className="w-4 h-4 text-primary" />
+              <span>Работно време</span>
+            </div>
+            <div className="space-y-1.5">
+              {hours.map((h, idx) => (
+                <div key={idx} className="flex justify-between items-center text-sm px-2 py-1 rounded hover:bg-muted/50 transition-colors">
+                  <span className="text-muted-foreground font-medium">{h.day}</span>
+                  <span className={`font-semibold ${h.time === 'Затворено' ? 'text-destructive' : 'text-foreground'}`}>
+                    {h.time}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+
+          {store.new_stock && (
+            <div className="flex items-start gap-3 text-sm bg-primary/5 border border-primary/10 p-3 rounded-lg">
+              <Package className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <div className="font-semibold text-primary mb-0.5">Нова стока</div>
+                <div className="text-foreground">{store.new_stock}</div>
+              </div>
+            </div>
+          )}
+        </div>
 
         {store.gmaps_url && (
           <Button
             variant="default"
-            size="sm"
-            className="w-full"
+            size="default"
+            className="w-full mt-4"
             asChild
           >
             <a href={store.gmaps_url} target="_blank" rel="noopener noreferrer">
+              <MapPin className="w-4 h-4 mr-2" />
               Виж на картата
             </a>
           </Button>

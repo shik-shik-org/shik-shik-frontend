@@ -8,11 +8,12 @@ interface CityFilterProps {
 
 export const CityFilter = ({ cities, selectedCity, onCityChange }: CityFilterProps) => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
       <Button
         variant={selectedCity === 'all' ? 'default' : 'outline'}
-        size="sm"
+        size="default"
         onClick={() => onCityChange('all')}
+        className="font-medium"
       >
         Всички градове
       </Button>
@@ -20,8 +21,9 @@ export const CityFilter = ({ cities, selectedCity, onCityChange }: CityFilterPro
         <Button
           key={city}
           variant={selectedCity === city ? 'default' : 'outline'}
-          size="sm"
+          size="default"
           onClick={() => onCityChange(city)}
+          className="font-medium"
         >
           {city}
         </Button>

@@ -60,12 +60,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-6">
-          <div>
-            <h2 className="text-3xl font-bold text-foreground mb-2">Нашите магазини</h2>
-            <p className="text-muted-foreground">
-              Открийте най-близкия магазин Шик Шик във вашия град
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-3">Нашите магазини</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Открийте стилни и качествени дрехи втора употреба на достъпни цени
             </p>
           </div>
 
