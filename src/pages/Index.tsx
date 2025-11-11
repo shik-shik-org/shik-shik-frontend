@@ -8,6 +8,7 @@ import { SearchBar } from '@/components/SearchBar';
 import { Button } from '@/components/ui/button';
 import { Loader2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getStoreImages } from '@/config/storeImages';
 
 const Index = () => {
   const [selectedCity, setSelectedCity] = useState('all');
@@ -43,7 +44,14 @@ const Index = () => {
       );
     }
 
-    return filtered;
+    // Merge store images from local mapping
+    return filtered.map(store => {
+      const localImages = getStoreImages(store.city, store.address);
+      return {
+        ...store,
+        photos: localImages.length > 0 ? localImages : store.photos
+      };
+    });
   }, [stores, selectedCity, searchQuery]);
 
   if (error) {
