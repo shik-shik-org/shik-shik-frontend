@@ -5,20 +5,20 @@ import { Link } from 'react-router-dom';
 
 export const Header = () => {
   return (
-    <header className="bg-gradient-to-b from-primary/5 to-background border-b border-primary/10 sticky top-0 z-50 shadow-md">
-      <div className="container mx-auto px-4 py-4">
+    <header className="bg-background/95 backdrop-blur-sm border-b border-primary/10 sticky top-0 z-50 shadow-sm">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex-shrink-0">
+          <Link to="/" className="mx-auto md:mx-0">
             <img 
               src={logo} 
               alt="Шик Шик" 
-              className="h-28 md:h-36 lg:h-40 w-auto hover:opacity-90 transition-opacity"
+              className="h-20 md:h-24 w-auto hover:scale-105 transition-transform"
             />
           </Link>
-          <Button asChild variant="default" size="lg" className="shadow-lg">
+          <Button asChild variant="default" size="default" className="hidden md:flex shadow-md">
             <Link to="/contact">
-              <Mail className="w-5 h-5 mr-2" />
-              Свържете се с нас
+              <Mail className="w-4 h-4 mr-2" />
+              Контакт
             </Link>
           </Button>
         </div>

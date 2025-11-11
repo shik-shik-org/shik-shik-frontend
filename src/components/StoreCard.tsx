@@ -3,6 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapPin, Phone, Clock, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatHours } from '@/utils/formatHours';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 interface StoreCardProps {
   store: Store;
@@ -12,7 +19,27 @@ export const StoreCard = ({ store }: StoreCardProps) => {
   const hours = formatHours(store.hours);
 
   return (
-    <Card className="hover:shadow-lg transition-all duration-300 hover:border-primary/30 hover:shadow-primary/10 h-full flex flex-col bg-card/80 backdrop-blur-sm">
+    <Card className="hover:shadow-xl transition-all duration-300 hover:border-primary/30 hover:shadow-primary/20 h-full flex flex-col overflow-hidden">
+      {store.photos && store.photos.length > 0 && (
+        <Carousel className="w-full">
+          <CarouselContent>
+            {store.photos.map((photo, idx) => (
+              <CarouselItem key={idx}>
+                <div className="aspect-video w-full overflow-hidden">
+                  <img 
+                    src={photo} 
+                    alt={`${store.name} - снимка ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-2" />
+          <CarouselNext className="right-2" />
+        </Carousel>
+      )}
+      
       <CardHeader className="pb-3">
         <CardTitle className="text-lg text-foreground leading-tight">{store.name}</CardTitle>
       </CardHeader>
