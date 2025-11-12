@@ -11,6 +11,7 @@ import { Loader2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getStoreImages } from '@/config/storeImages';
 import { matchesBilingual } from '@/utils/transliteration';
+import logo from '@/assets/logo.png';
 
 const Index = () => {
   const [selectedCity, setSelectedCity] = useState('all');
@@ -85,13 +86,13 @@ const Index = () => {
       <section className="bg-gradient-to-br from-primary/10 via-primary/5 to-background border-b border-primary/10">
         <div className="container mx-auto px-4 py-16 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="flex justify-center">
-              <img 
-                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop" 
-                alt="Шик Шик магазин" 
-                className="rounded-2xl shadow-xl w-full max-w-md object-cover aspect-square"
-              />
-            </div>
+          <div className="flex justify-center">
+            <img 
+              src={logo}
+              alt="Шик Шик магазин" 
+              className="rounded-3xl w-full max-w-md object-cover aspect-square shadow-xl bg-[#7b1b1b]"
+            />
+          </div>
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl font-bold text-foreground">За нас</h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
