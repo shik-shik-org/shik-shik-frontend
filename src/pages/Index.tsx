@@ -15,6 +15,15 @@ const Index = () => {
   const [selectedCity, setSelectedCity] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Handle scroll to stores section on hash navigation
+  useEffect(() => {
+    if (window.location.hash === '#stores') {
+      setTimeout(() => {
+        document.getElementById('stores')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
+
   const { data: stores, isLoading, error } = useQuery({
     queryKey: ['stores'],
     queryFn: storeService.getAllStores,
