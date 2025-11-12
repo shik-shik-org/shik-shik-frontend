@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { storeService } from '@/services/storeService';
 import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 import { StoreCard } from '@/components/StoreCard';
 import { CityFilter } from '@/components/CityFilter';
 import { SearchBar } from '@/components/SearchBar';
@@ -142,6 +143,8 @@ const Index = () => {
           )}
         </div>
       </main>
+      
+      <Footer />
     </div>
   );
 };
