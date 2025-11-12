@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Loader2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getStoreImages } from '@/config/storeImages';
+import { matchesBilingual } from '@/utils/transliteration';
 
 const Index = () => {
   const [selectedCity, setSelectedCity] = useState('all');
@@ -44,13 +45,12 @@ const Index = () => {
     }
 
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
         (s) =>
-          s.name.toLowerCase().includes(query) ||
-          s.address.toLowerCase().includes(query) ||
-          s.city.toLowerCase().includes(query) ||
-          s.new_stock?.toLowerCase().includes(query)
+          matchesBilingual(s.name, searchQuery) ||
+          matchesBilingual(s.address, searchQuery) ||
+          matchesBilingual(s.city, searchQuery) ||
+          (s.new_stock && matchesBilingual(s.new_stock, searchQuery))
       );
     }
 

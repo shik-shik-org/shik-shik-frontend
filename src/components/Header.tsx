@@ -18,15 +18,7 @@ export const Header = () => {
           
           <nav className="hidden md:flex items-center gap-8">
             <Link 
-              to="/"
-              onClick={(e) => {
-                if (window.location.pathname === '/') {
-                  e.preventDefault();
-                  document.getElementById('stores')?.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  window.location.href = '/#stores';
-                }
-              }}
+              to="/#stores"
               className="text-foreground/80 hover:text-primary font-medium transition-colors flex items-center gap-2"
             >
               <MapPin className="w-4 h-4" />
