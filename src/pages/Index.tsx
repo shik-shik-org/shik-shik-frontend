@@ -107,7 +107,7 @@ const Index = () => {
       </section>
 
       {/* Stores Section */}
-      <main className="container mx-auto px-4 py-12 max-w-7xl">
+      <main id="stores" className="container mx-auto px-4 py-12 max-w-7xl scroll-mt-20">
         <div className="space-y-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Нашите магазини</h2>

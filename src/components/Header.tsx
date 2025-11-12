@@ -17,14 +17,13 @@ export const Header = () => {
           </Link>
           
           <nav className="hidden md:flex items-center gap-8">
-            <NavLink 
-              to="/" 
+            <a 
+              href="/#stores" 
               className="text-foreground/80 hover:text-primary font-medium transition-colors flex items-center gap-2"
-              activeClassName="text-primary"
             >
               <MapPin className="w-4 h-4" />
               Магазини
-            </NavLink>
+            </a>
             <NavLink 
               to="/contact" 
               className="text-foreground/80 hover:text-primary font-medium transition-colors flex items-center gap-2"

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Clock, Phone } from 'lucide-react';
+import { MapPin, Mail, Clock } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +11,11 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Шик Шик</h3>
+            <img 
+              src={logo} 
+              alt="Шик Шик" 
+              className="h-20 w-auto"
+            />
             <p className="text-sm text-muted-foreground leading-relaxed">
               Водеща верига магазини за дрехи втора употреба в България. 
               Качествени облекла на достъпни цени с фокус върху устойчивостта.
@@ -21,13 +26,13 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-foreground">Бързи връзки</h3>
             <nav className="flex flex-col space-y-2">
-              <Link 
-                to="/" 
+              <a 
+                href="/#stores" 
                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
               >
                 <MapPin className="w-4 h-4" />
                 Нашите магазини
-              </Link>
+              </a>
               <Link 
                 to="/contact" 
                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
@@ -62,12 +67,9 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground text-center md:text-left">
+          <div className="flex justify-center items-center">
+            <p className="text-sm text-muted-foreground text-center">
               © {currentYear} Шик Шик. Всички права запазени.
-            </p>
-            <p className="text-sm text-muted-foreground text-center md:text-right">
-              Устойчива мода за всеки
             </p>
           </div>
         </div>
