@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { getCityNameInBulgarian, normalizeCityName } from '@/utils/cityNames';
 
 interface CityFilterProps {
   cities: string[];
@@ -25,7 +26,7 @@ export const CityFilter = ({ cities, selectedCity, onCityChange }: CityFilterPro
           onClick={() => onCityChange(city)}
           className="font-medium"
         >
-          {city}
+          {getCityNameInBulgarian(normalizeCityName(city))}
         </Button>
       ))}
     </div>
