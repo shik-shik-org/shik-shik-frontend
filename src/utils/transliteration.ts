@@ -28,6 +28,30 @@ export function transliterateCyrillicToLatin(text: string): string {
 }
 
 /**
+ * Transliterate Latin text to possible Cyrillic matches
+ */
+function transliterateLatinToCyrillic(text: string): string {
+  let result = text.toLowerCase();
+  
+  // Replace multi-character sequences first
+  result = result.replace(/sht/g, 'щ').replace(/sh/g, 'ш')
+    .replace(/ch/g, 'ч').replace(/zh/g, 'ж')
+    .replace(/ts/g, 'ц').replace(/yu/g, 'ю')
+    .replace(/ya/g, 'я');
+  
+  // Replace single characters
+  const map: Record<string, string> = {
+    'a': 'а', 'b': 'б', 'v': 'в', 'g': 'г', 'd': 'д',
+    'e': 'е', 'z': 'з', 'i': 'и', 'y': 'й', 'k': 'к',
+    'l': 'л', 'm': 'м', 'n': 'н', 'o': 'о', 'p': 'п',
+    'r': 'р', 's': 'с', 't': 'т', 'u': 'у', 'f': 'ф',
+    'h': 'х'
+  };
+  
+  return result.split('').map(char => map[char] || char).join('');
+}
+
+/**
  * Check if text matches query in both Cyrillic and Latin
  */
 export function matchesBilingual(text: string, query: string): boolean {
@@ -39,39 +63,17 @@ export function matchesBilingual(text: string, query: string): boolean {
     return true;
   }
   
-  // Transliterate text to Latin and check
+  // Transliterate text (Cyrillic) to Latin and check
   const transliteratedText = transliterateCyrillicToLatin(lowerText);
   if (transliteratedText.includes(lowerQuery)) {
     return true;
   }
   
-  // Check if query is Latin and text is Cyrillic
-  // For example: "sofia" should match "София"
-  const queryChars = lowerQuery.split('');
-  let textIndex = 0;
-  let queryIndex = 0;
-  
-  while (textIndex < lowerText.length && queryIndex < queryChars.length) {
-    const textChar = lowerText[textIndex];
-    const queryChar = queryChars[queryIndex];
-    
-    // Direct character match
-    if (textChar === queryChar) {
-      textIndex++;
-      queryIndex++;
-      continue;
-    }
-    
-    // Try transliteration match
-    const transliterated = cyrillicToLatin[textChar];
-    if (transliterated && lowerQuery.substring(queryIndex).startsWith(transliterated.toLowerCase())) {
-      textIndex++;
-      queryIndex += transliterated.length;
-      continue;
-    }
-    
-    textIndex++;
+  // Transliterate query (Latin) to Cyrillic and check
+  const transliteratedQuery = transliterateLatinToCyrillic(lowerQuery);
+  if (lowerText.includes(transliteratedQuery)) {
+    return true;
   }
   
-  return queryIndex === queryChars.length;
+  return false;
 }

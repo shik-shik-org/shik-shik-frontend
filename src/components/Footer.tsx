@@ -4,13 +4,20 @@ import { MapPin, Mail, Clock } from 'lucide-react';
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToStores = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.location.pathname === '/') {
+      e.preventDefault();
+      document.getElementById('stores')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-card border-t border-border mt-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {/* About Section */}
-          <div className="space-y-3">
-            <h3 className="text-xl font-bold text-foreground">Шик Шик</h3>
+          <div className="space-y-2">
+            <h3 className="text-lg font-bold text-foreground">Шик Шик</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Водеща верига магазини за дрехи втора употреба в България. 
               Качествени облекла на достъпни цени с фокус върху устойчивостта.
@@ -18,11 +25,12 @@ export const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">Бързи връзки</h3>
-            <nav className="flex flex-col space-y-2">
+          <div className="space-y-2">
+            <h3 className="text-base font-semibold text-foreground">Бързи връзки</h3>
+            <nav className="flex flex-col space-y-1.5">
               <Link 
                 to="/#stores"
+                onClick={scrollToStores}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
               >
                 <MapPin className="w-4 h-4" />
@@ -39,9 +47,9 @@ export const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">Информация</h3>
-            <div className="space-y-3">
+          <div className="space-y-2">
+            <h3 className="text-base font-semibold text-foreground">Информация</h3>
+            <div className="space-y-2">
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
                 <Clock className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
@@ -61,7 +69,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border">
+        <div className="pt-6 border-t border-border">
           <div className="flex justify-center items-center">
             <p className="text-sm text-muted-foreground text-center">
               © {currentYear} Шик Шик. Всички права запазени.
