@@ -1,4 +1,3 @@
-// Map for converting Bulgarian Cyrillic to Latin (transliteration)
 const cyrillicToLatin: Record<string, string> = {
   'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
   'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
@@ -12,7 +11,6 @@ const cyrillicToLatin: Record<string, string> = {
   'Ю': 'Yu', 'Я': 'Ya'
 };
 
-// Map for converting Latin to Bulgarian Cyrillic (reverse transliteration)
 const latinToCyrillic: Record<string, string[]> = {
   'a': ['а', 'ъ'], 'b': ['б'], 'v': ['в'], 'g': ['г'], 'd': ['д'], 'e': ['е'],
   'z': ['з'], 'i': ['и'], 'y': ['й', 'ь'], 'k': ['к'], 'l': ['л'], 'm': ['м'],
@@ -20,26 +18,18 @@ const latinToCyrillic: Record<string, string[]> = {
   'u': ['у'], 'f': ['ф'], 'h': ['х', 'ж'],
 };
 
-/**
- * Transliterate Cyrillic text to Latin
- */
 export function transliterateCyrillicToLatin(text: string): string {
   return text.split('').map(char => cyrillicToLatin[char] || char).join('');
 }
 
-/**
- * Transliterate Latin text to possible Cyrillic matches
- */
 function transliterateLatinToCyrillic(text: string): string {
   let result = text.toLowerCase();
   
-  // Replace multi-character sequences first
   result = result.replace(/sht/g, 'щ').replace(/sh/g, 'ш')
     .replace(/ch/g, 'ч').replace(/zh/g, 'ж')
     .replace(/ts/g, 'ц').replace(/yu/g, 'ю')
     .replace(/ya/g, 'я');
   
-  // Replace single characters
   const map: Record<string, string> = {
     'a': 'а', 'b': 'б', 'v': 'в', 'g': 'г', 'd': 'д',
     'e': 'е', 'z': 'з', 'i': 'и', 'y': 'й', 'k': 'к',
@@ -51,25 +41,19 @@ function transliterateLatinToCyrillic(text: string): string {
   return result.split('').map(char => map[char] || char).join('');
 }
 
-/**
- * Check if text matches query in both Cyrillic and Latin
- */
 export function matchesBilingual(text: string, query: string): boolean {
   const lowerText = text.toLowerCase();
   const lowerQuery = query.toLowerCase();
   
-  // Direct match
   if (lowerText.includes(lowerQuery)) {
     return true;
   }
   
-  // Transliterate text (Cyrillic) to Latin and check
   const transliteratedText = transliterateCyrillicToLatin(lowerText);
   if (transliteratedText.includes(lowerQuery)) {
     return true;
   }
   
-  // Transliterate query (Latin) to Cyrillic and check
   const transliteratedQuery = transliterateLatinToCyrillic(lowerQuery);
   if (lowerText.includes(transliteratedQuery)) {
     return true;

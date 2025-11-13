@@ -21,8 +21,6 @@ export const StoreCard = ({ store }: StoreCardProps) => {
   // Default images for stores without photos
   const defaultImages = [
     'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&h=600&fit=crop'
   ];
   
   const images = store.photos && store.photos.length > 0 ? store.photos : defaultImages;

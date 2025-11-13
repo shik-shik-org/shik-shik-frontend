@@ -17,7 +17,6 @@ const Index = () => {
   const [selectedCity, setSelectedCity] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Handle scroll to stores section on hash navigation
   useEffect(() => {
     if (window.location.hash === '#stores') {
       setTimeout(() => {
@@ -55,7 +54,6 @@ const Index = () => {
       );
     }
 
-    // Merge store images from local mapping
     return filtered.map(store => {
       const localImages = getStoreImages(store.city, store.address);
       return {

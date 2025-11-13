@@ -1,5 +1,4 @@
 export const storeImageMapping: Record<string, string[]> = {
-  // Blagoevgrad store
   blagoevgrad: [
     '/images/blagoevgrad/IMG_4786.JPG',
     '/images/blagoevgrad/IMG_4778.JPG',
@@ -13,7 +12,6 @@ export const storeImageMapping: Record<string, string[]> = {
     '/images/blagoevgrad/IMG_4787.JPG',
   ],
 
-  // Pazardjik stores (match your folders exactly)
   Ekzarh_iosif: [
     '/images/Pazardjik/Ekzarh_iosif/IMG_4701.JPG',
     '/images/Pazardjik/Ekzarh_iosif/IMG_4702.JPG',
@@ -62,7 +60,6 @@ export const storeImageMapping: Record<string, string[]> = {
     '/images/Pazardjik/Tsar_Shishman_10/IMG_4700.JPG',
   ],
 
-  // Razlog store (your working example)
   razlog: [
     '/images/Razlog/IMG_4746.jpeg',
     '/images/Razlog/IMG_4747.jpeg',
@@ -71,16 +68,13 @@ export const storeImageMapping: Record<string, string[]> = {
   ],
 };
 
-// Helper function to get store images based on city and address
 export const getStoreImages = (city: string, address: string): string[] => {
   const cityLower = (city || '').toLowerCase().trim();
   const addressLower = (address || '').toLowerCase().trim();
 
-  // Cities
   if (cityLower === 'blagoevgrad') return storeImageMapping.blagoevgrad || [];
   if (cityLower === 'razlog') return storeImageMapping.razlog || [];
 
-  // Accept common variants for Pazardjik
   const isPazardzhik =
     cityLower === 'pazardjik' ||
     cityLower === 'pazardzhik' ||
