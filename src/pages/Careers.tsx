@@ -1,32 +1,93 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
-import { Briefcase, Upload } from 'lucide-react';
+import { toast } from 'sonner';
+import { API_BASE_URL } from '@/config/api';
+import { Briefcase, Loader2 } from 'lucide-react';
+
+const careerSchema = z.object({
+  firstName: z.string()
+    .trim()
+    .min(2, { message: 'Името трябва да е поне 2 символа' })
+    .max(80, { message: 'Името трябва да е максимум 80 символа' }),
+  lastName: z.string()
+    .trim()
+    .min(2, { message: 'Фамилията трябва да е поне 2 символа' })
+    .max(80, { message: 'Фамилията трябва да е максимум 80 символа' }),
+  phone: z.string()
+    .trim()
+    .min(8, { message: 'Телефонът трябва да е поне 8 символа' })
+    .max(20, { message: 'Телефонът трябва да е максимум 20 символа' }),
+  position: z.string()
+    .min(1, { message: 'Моля, изберете позиция' }),
+  email: z.string()
+    .trim()
+    .email({ message: 'Невалиден имейл адрес' })
+    .max(255, { message: 'Имейлът трябва да е максимум 255 символа' })
+    .optional()
+    .or(z.literal('')),
+  city: z.string().optional(),
+  coverLetter: z.string()
+    .trim()
+    .max(2000, { message: 'Мотивационното писмо трябва да е максимум 2000 символа' })
+    .optional()
+    .or(z.literal('')),
+});
+
+type CareerFormData = z.infer<typeof careerSchema>;
 
 export default function Careers() {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const form = useForm<CareerFormData>({
+    resolver: zodResolver(careerSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      position: '',
+      email: '',
+      city: '',
+      coverLetter: '',
+    },
+  });
 
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Заявлението е изпратено успешно!",
-        description: "Ще се свържем с вас скоро.",
+  const onSubmit = async (data: CareerFormData) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/careers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
+
+      if (!response.ok) {
+        throw new Error('Неуспешно изпращане');
+      }
+
+      const result = await response.json();
+      toast.success('Успешно!', {
+        description: result.message || 'Вашето заявление беше изпратено успешно.',
+      });
+      form.reset();
+    } catch (error) {
+      toast.error('Грешка', {
+        description: 'Не успяхме да изпратим заявлението. Моля, опитайте отново.',
+      });
+    } finally {
       setIsSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-    }, 1000);
+    }
   };
 
   return (
@@ -57,117 +118,147 @@ export default function Careers() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">Име *</Label>
-                    <Input 
-                      id="firstName" 
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
                       name="firstName"
-                      placeholder="Вашето име" 
-                      required 
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Име *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Вашето име" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Фамилия *</Label>
-                    <Input 
-                      id="lastName" 
+                    <FormField
+                      control={form.control}
                       name="lastName"
-                      placeholder="Вашата фамилия" 
-                      required 
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Фамилия *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Вашата фамилия" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Имейл *</Label>
-                    <Input 
-                      id="email" 
-                      name="email"
-                      type="email" 
-                      placeholder="example@email.com" 
-                      required 
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Телефон *</Label>
-                    <Input 
-                      id="phone" 
-                      name="phone"
-                      type="tel" 
-                      placeholder="+359 ..." 
-                      required 
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="position">Позиция *</Label>
-                  <Select name="position" required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Изберете позиция" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="sales">Продавач-консултант</SelectItem>
-                      <SelectItem value="manager">Мениджър магазин</SelectItem>
-                      <SelectItem value="warehouse">Складов работник</SelectItem>
-                      <SelectItem value="driver">Шофьор</SelectItem>
-                      <SelectItem value="other">Друга позиция</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="city">Предпочитан град *</Label>
-                  <Select name="city" required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Изберете град" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="sofia">София</SelectItem>
-                      <SelectItem value="pazardjik">Пазарджик</SelectItem>
-                      <SelectItem value="montana">Монтана</SelectItem>
-                      <SelectItem value="blagoevgrad">Благоевград</SelectItem>
-                      <SelectItem value="razlog">Разлог</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="cv">CV (PDF, DOC, DOCX) *</Label>
-                  <div className="flex items-center gap-2">
-                    <Input 
-                      id="cv" 
-                      name="cv"
-                      type="file" 
-                      accept=".pdf,.doc,.docx"
-                      required 
-                      className="cursor-pointer"
-                    />
-                    <Upload className="w-5 h-5 text-muted-foreground" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="coverLetter">Мотивационно писмо</Label>
-                  <Textarea 
-                    id="coverLetter" 
-                    name="coverLetter"
-                    placeholder="Разкажете ни защо искате да работите при нас..."
-                    rows={6}
-                    className="resize-none"
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Телефон *</FormLabel>
+                        <FormControl>
+                          <Input type="tel" placeholder="+359 ..." {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full md:w-auto px-8 h-11"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Изпращане...' : 'Изпрати заявление'}
-                </Button>
-              </form>
+                  <FormField
+                    control={form.control}
+                    name="position"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Позиция *</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Изберете позиция" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="sales">Продавач-консултант</SelectItem>
+                            <SelectItem value="warehouse">Складов работник</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Имейл (по избор)</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="example@email.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Предпочитан град (по избор)</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Изберете град" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="sofia">София</SelectItem>
+                            <SelectItem value="pazardjik">Пазарджик</SelectItem>
+                            <SelectItem value="montana">Монтана</SelectItem>
+                            <SelectItem value="blagoevgrad">Благоевград</SelectItem>
+                            <SelectItem value="razlog">Разлог</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="coverLetter"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Мотивационно писмо (по избор)</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="Разкажете ни защо искате да работите при нас..."
+                            rows={6}
+                            className="resize-none"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button 
+                    type="submit" 
+                    className="w-full md:w-auto px-8 h-11"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Изпращане...
+                      </>
+                    ) : (
+                      'Изпрати заявление'
+                    )}
+                  </Button>
+                </form>
+              </Form>
             </CardContent>
           </Card>
 
@@ -181,15 +272,7 @@ export default function Careers() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary">•</span>
-                  <span>Възможности за кариерно развитие</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
                   <span>Приятна работна среда</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span>Обучения и професионално развитие</span>
                 </li>
               </ul>
             </CardContent>

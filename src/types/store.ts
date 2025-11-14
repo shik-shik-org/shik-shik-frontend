@@ -1,7 +1,7 @@
 export interface Review {
   author: string;
   rating: number;
-  text: string;
+  comment: string;
   date?: string;
 }
 
