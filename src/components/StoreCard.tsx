@@ -112,7 +112,7 @@ export const StoreCard = ({ store }: StoreCardProps) => {
                         ))}
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground line-clamp-2">{review.text}</p>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{review.comment}</p>
                   </div>
                 ))}
               </div>
