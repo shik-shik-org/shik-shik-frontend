@@ -1,3 +1,10 @@
+export interface Review {
+  author: string;
+  rating: number;
+  text: string;
+  date?: string;
+}
+
 export interface Store {
   id: number;
   city: string;
@@ -9,4 +16,5 @@ export interface Store {
   description?: string;
   gmaps_url?: string;
   photos: string[];
+  reviews?: Review[];
 }
