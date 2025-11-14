@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Clock } from 'lucide-react';
+import { MapPin, Mail, Clock, Briefcase } from 'lucide-react';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -35,6 +35,13 @@ export const Footer = () => {
               >
                 <MapPin className="w-4 h-4" />
                 Нашите магазини
+              </Link>
+              <Link 
+                to="/careers" 
+                className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+              >
+                <Briefcase className="w-4 h-4" />
+                Кариери
               </Link>
               <Link 
                 to="/contact" 

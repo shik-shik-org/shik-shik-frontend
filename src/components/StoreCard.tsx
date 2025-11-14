@@ -1,6 +1,6 @@
 import { Store } from '@/types/store';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Phone, Clock, Package } from 'lucide-react';
+import { MapPin, Phone, Clock, Package, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatHours } from '@/utils/formatHours';
 import {
@@ -85,6 +85,33 @@ export const StoreCard = ({ store }: StoreCardProps) => {
               <div>
                 <div className="font-semibold text-primary mb-0.5">Нова стока</div>
                 <div className="text-foreground">{store.new_stock}</div>
+              </div>
+            </div>
+          )}
+
+          {store.reviews && store.reviews.length > 0 && (
+            <div className="space-y-2 pt-2">
+              <div className="flex items-center gap-2 text-sm font-semibold text-foreground border-b border-border pb-2">
+                <Star className="w-4 h-4 text-primary fill-primary" />
+                <span>Отзиви</span>
+              </div>
+              <div className="space-y-2 max-h-40 overflow-y-auto">
+                {store.reviews.slice(0, 3).map((review, idx) => (
+                  <div key={idx} className="bg-muted/50 p-3 rounded-lg space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-sm text-foreground">{review.author}</span>
+                      <div className="flex items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className={`w-3 h-3 ${i < review.rating ? 'text-primary fill-primary' : 'text-muted-foreground'}`} 
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{review.text}</p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
