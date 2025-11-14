@@ -1,6 +1,6 @@
 const cityNameMap: Record<string, string> = {
   'Sofia': 'София',
-  'Pazardjik': 'Пазарджик',
+  'Pazardzhik': 'Пазарджик',
   'Montana': 'Монтана',
   'Blagoevgrad': 'Благоевград',
   'Razlog': 'Разлог'

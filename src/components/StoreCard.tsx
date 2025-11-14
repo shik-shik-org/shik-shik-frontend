@@ -18,7 +18,6 @@ interface StoreCardProps {
 export const StoreCard = ({ store }: StoreCardProps) => {
   const hours = formatHours(store.hours);
   
-  // Default images for stores without photos
   const defaultImages = [
     'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&h=600&fit=crop',
   ];
@@ -32,11 +31,15 @@ export const StoreCard = ({ store }: StoreCardProps) => {
           {images.map((photo, idx) => (
             <CarouselItem key={idx}>
               <div className="aspect-video w-full overflow-hidden bg-muted">
-                <img 
-                  src={photo} 
+                <img
+                  src={photo}
                   alt={`${store.name} - снимка ${idx + 1}`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
+
               </div>
             </CarouselItem>
           ))}

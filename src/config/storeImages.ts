@@ -1,106 +1,106 @@
+export const IMAGE_BASE_URL = "https://images.shikshik.eu";
+
+// Always generate .jpeg images
+const makeImages = (path: string, count: number): string[] =>
+  Array.from(
+    { length: count },
+    (_, i) => `${IMAGE_BASE_URL}/${path}/${i + 1}.jpeg`
+  );
+
+// -------- MAPPING --------
+
 export const storeImageMapping: Record<string, string[]> = {
-  blagoevgrad: [
-    '/images/blagoevgrad/IMG_4786.JPG',
-    '/images/blagoevgrad/IMG_4778.JPG',
-    '/images/blagoevgrad/IMG_4779.JPG',
-    '/images/blagoevgrad/IMG_4780.JPG',
-    '/images/blagoevgrad/IMG_4781.JPG',
-    '/images/blagoevgrad/IMG_4782.JPG',
-    '/images/blagoevgrad/IMG_4783.JPG',
-    '/images/blagoevgrad/IMG_4784.JPG',
-    '/images/blagoevgrad/IMG_4785.JPG',
-    '/images/blagoevgrad/IMG_4787.JPG',
-  ],
+  blagoevgrad: makeImages(
+    "store-images/Blagoevgrad/Todor-Alexandrov",
+    10
+  ),
 
-  Ekzarh_iosif: [
-    '/images/Pazardjik/Ekzarh_iosif/IMG_4701.JPG',
-    '/images/Pazardjik/Ekzarh_iosif/IMG_4702.JPG',
-    '/images/Pazardjik/Ekzarh_iosif/IMG_4703.JPG',
-    '/images/Pazardjik/Ekzarh_iosif/IMG_4704.JPG',
-    '/images/Pazardjik/Ekzarh_iosif/IMG_4705.JPG',
-  ],
-  Gladstone_10: [
-    '/images/Pazardjik/Gladstone_10/IMG_4733.JPG',
-    '/images/Pazardjik/Gladstone_10/IMG_4729.JPG',
-    '/images/Pazardjik/Gladstone_10/IMG_4730.JPG',
-    '/images/Pazardjik/Gladstone_10/IMG_4731.JPG',
-    '/images/Pazardjik/Gladstone_10/IMG_4732.JPG',
-  ],
-  Ivan_Vazov_12: [
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4713.JPG',
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4712.JPG',
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4715.JPG',
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4716.JPG',
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4717.JPG',
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4718.JPG',
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4719.JPG',
-    '/images/Pazardjik/Ivan_Vazov_12/IMG_4720.JPG',
-  ],
-  Targovska: [
-    '/images/Pazardjik/Targovska/IMG_4727.JPG',
-    '/images/Pazardjik/Targovska/IMG_4721.JPG',
-    '/images/Pazardjik/Targovska/IMG_4722.JPG',
-    '/images/Pazardjik/Targovska/IMG_4723.JPG',
-    '/images/Pazardjik/Targovska/IMG_4724.JPG',
-    '/images/Pazardjik/Targovska/IMG_4725.JPG',
-    '/images/Pazardjik/Targovska/IMG_4726.JPG',
-  ],
-  Tsar_Samuil_4: [
-    '/images/Pazardjik/Tsar_Samuil_4/IMG_4708.JPG',
-    '/images/Pazardjik/Tsar_Samuil_4/IMG_4706.JPG',
-    '/images/Pazardjik/Tsar_Samuil_4/IMG_4707.JPG',
-    '/images/Pazardjik/Tsar_Samuil_4/IMG_4709.JPG',
-    '/images/Pazardjik/Tsar_Samuil_4/IMG_4710.JPG',
-    '/images/Pazardjik/Tsar_Samuil_4/IMG_4711.JPG',
-  ],
-  Tsar_Shishman_10: [
-    '/images/Pazardjik/Tsar_Shishman_10/IMG_4697.JPG',
-    '/images/Pazardjik/Tsar_Shishman_10/IMG_4698.JPG',
-    '/images/Pazardjik/Tsar_Shishman_10/IMG_4699.JPG',
-    '/images/Pazardjik/Tsar_Shishman_10/IMG_4700.JPG',
-  ],
+  Ekzarh_iosif: makeImages(
+    "store-images/Pazardzhik/Ekzarh-Yosif-4",
+    5
+  ),
 
-  razlog: [
-    '/images/Razlog/IMG_4746.jpeg',
-    '/images/Razlog/IMG_4747.jpeg',
-    '/images/Razlog/IMG_4748.jpeg',
-    '/images/Razlog/IMG_4749.jpeg',
-  ],
+  Gladstone_10: makeImages(
+    "store-images/Pazardzhik/Gladstone-10",
+    5
+  ),
+
+  Ivan_Vazov_12: makeImages(
+    "store-images/Pazardzhik/Ivan-Vazov-12",
+    8
+  ),
+
+  Targovska: makeImages(
+    "store-images/Pazardzhik/Targovska-16",
+    7
+  ),
+
+  Tsar_Samuil_4: makeImages(
+    "store-images/Pazardzhik/Tsar-Samuil",
+    6
+  ),
+
+  Tsar_Shishman_10: makeImages(
+    "store-images/Pazardzhik/Tsar-Shishman-10",
+    4
+  ),
+
+  razlog: makeImages(
+    "store-images/Razlog/Arhitekt-Barov-8",
+    4
+  ),
 };
 
-export const getStoreImages = (city: string, address: string): string[] => {
-  const cityLower = (city || '').toLowerCase().trim();
-  const addressLower = (address || '').toLowerCase().trim();
+// -------- LOOKUP FUNCTION --------
 
-  if (cityLower === 'blagoevgrad') return storeImageMapping.blagoevgrad || [];
-  if (cityLower === 'razlog') return storeImageMapping.razlog || [];
+export const getStoreImages = (city: string, address: string): string[] => {
+  const cityLower = (city || "").toLowerCase().trim();
+  const addressLower = (address || "").toLowerCase().trim();
+
+  // use includes so it works with "Blagoevgrad Center", "Pazardzhik Center", etc.
+  if (cityLower.includes("blagoevgrad"))
+    return storeImageMapping.blagoevgrad || [];
+
+  if (cityLower.includes("razlog"))
+    return storeImageMapping.razlog || [];
 
   const isPazardzhik =
-    cityLower === 'pazardjik' ||
-    cityLower === 'pazardzhik' ||
-    cityLower === 'пазарджик';
+    cityLower.includes("pazardjik") ||
+    cityLower.includes("pazardzhik") ||
+    cityLower.includes("пазарджик");
 
   if (isPazardzhik) {
     if (
-      addressLower.includes('екзарх') ||
-      addressLower.includes('йосиф') ||
-      addressLower.includes('iosif') ||
-      addressLower.includes('ekzarh')
-    ) return storeImageMapping.Ekzarh_iosif || [];
+      addressLower.includes("екзарх") ||
+      addressLower.includes("йосиф") ||
+      addressLower.includes("iosif") ||
+      addressLower.includes("ekzarh")
+    )
+      return storeImageMapping.Ekzarh_iosif || [];
 
-    if (addressLower.includes('гладстон') || addressLower.includes('gladston') || addressLower.includes('gladstone'))
+    if (
+      addressLower.includes("гладстон") ||
+      addressLower.includes("gladston") ||
+      addressLower.includes("gladstone")
+    )
       return storeImageMapping.Gladstone_10 || [];
 
-    if (addressLower.includes('иван вазов') || addressLower.includes('vazov'))
+    if (
+      addressLower.includes("иван вазов") ||
+      addressLower.includes("vazov")
+    )
       return storeImageMapping.Ivan_Vazov_12 || [];
 
-    if (addressLower.includes('търговска') || addressLower.includes('targovska'))
+    if (
+      addressLower.includes("търговска") ||
+      addressLower.includes("targovska")
+    )
       return storeImageMapping.Targovska || [];
 
-    if (addressLower.includes('самуил') || addressLower.includes('samuil'))
+    if (addressLower.includes("самуил") || addressLower.includes("samuil"))
       return storeImageMapping.Tsar_Samuil_4 || [];
 
-    if (addressLower.includes('шишман') || addressLower.includes('shishman'))
+    if (addressLower.includes("шишман") || addressLower.includes("shishman"))
       return storeImageMapping.Tsar_Shishman_10 || [];
   }
 
