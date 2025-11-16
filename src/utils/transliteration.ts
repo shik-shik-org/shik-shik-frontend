@@ -11,13 +11,6 @@ const cyrillicToLatin: Record<string, string> = {
   'Ю': 'Yu', 'Я': 'Ya'
 };
 
-const latinToCyrillic: Record<string, string[]> = {
-  'a': ['а', 'ъ'], 'b': ['б'], 'v': ['в'], 'g': ['г'], 'd': ['д'], 'e': ['е'],
-  'z': ['з'], 'i': ['и'], 'y': ['й', 'ь'], 'k': ['к'], 'l': ['л'], 'm': ['м'],
-  'n': ['н'], 'o': ['о'], 'p': ['п'], 'r': ['р'], 's': ['с'], 't': ['т'],
-  'u': ['у'], 'f': ['ф'], 'h': ['х', 'ж'],
-};
-
 export function transliterateCyrillicToLatin(text: string): string {
   return text.split('').map(char => cyrillicToLatin[char] || char).join('');
 }

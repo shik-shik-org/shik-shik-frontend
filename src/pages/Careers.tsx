@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { toast } from 'sonner';
 import { API_BASE_URL } from '@/config/api';
 import { Loader2 } from 'lucide-react';
-import logo from '@/assets/logo.png';
+import logo2 from '@/assets/logo2.png';
 
 const careerSchema = z.object({
   firstName: z.string()
@@ -101,9 +101,9 @@ export default function Careers() {
             <div className="flex justify-center">
               <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                 <img 
-                  src={logo} 
+                  src={logo2} 
                   alt="Шик Шик" 
-                  className="w-16 h-16 object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>

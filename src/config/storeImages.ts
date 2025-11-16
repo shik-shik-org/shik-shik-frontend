@@ -1,13 +1,10 @@
 export const IMAGE_BASE_URL = "https://images.shikshik.eu";
 
-// Always generate .jpeg images
 const makeImages = (path: string, count: number): string[] =>
   Array.from(
     { length: count },
     (_, i) => `${IMAGE_BASE_URL}/${path}/${i + 1}.jpeg`
   );
-
-// -------- MAPPING --------
 
 export const storeImageMapping: Record<string, string[]> = {
   blagoevgrad: makeImages(
@@ -51,13 +48,10 @@ export const storeImageMapping: Record<string, string[]> = {
   ),
 };
 
-// -------- LOOKUP FUNCTION --------
-
 export const getStoreImages = (city: string, address: string): string[] => {
   const cityLower = (city || "").toLowerCase().trim();
   const addressLower = (address || "").toLowerCase().trim();
 
-  // use includes so it works with "Blagoevgrad Center", "Pazardzhik Center", etc.
   if (cityLower.includes("blagoevgrad"))
     return storeImageMapping.blagoevgrad || [];
 

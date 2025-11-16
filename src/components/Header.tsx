@@ -1,4 +1,4 @@
-import logo from '@/assets/logo.png';
+import logo2 from '@/assets/logo2.png';
 import { Link } from 'react-router-dom';
 import { NavLink } from './NavLink';
 import { Mail, MapPin, Briefcase } from 'lucide-react';
@@ -17,7 +17,7 @@ export const Header = () => {
         <div className="flex items-center justify-between gap-4">
           <Link to="/" className="transition-transform hover:scale-105 flex-shrink-0">
             <img 
-              src={logo} 
+              src={logo2} 
               alt="Шик Шик" 
               className="h-14 md:h-16 w-auto object-contain max-w-none"
               style={{ aspectRatio: 'auto' }}
