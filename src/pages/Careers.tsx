@@ -243,20 +243,23 @@ export default function Careers() {
                     )}
                   />
 
-                  <Button 
-                    type="submit" 
-                    className="w-full md:w-auto px-8 h-11"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Изпращане...
-                      </>
-                    ) : (
-                      'Изпрати заявление'
-                    )}
-                  </Button>
+
+                  <div className="flex justify-center">
+                    <Button 
+                      type="submit" 
+                      className="w-auto px-8 h-11"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Изпращане...
+                        </>
+                      ) : (
+                        'Изпрати заявление'
+                      )}
+                    </Button>
+                  </div>
                 </form>
               </Form>
             </CardContent>

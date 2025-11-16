@@ -180,24 +180,26 @@ const Contact = () => {
                     )}
                   />
 
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Изпращане...
-                      </>
-                    ) : (
-                      <>
-                        <Mail className="w-4 h-4 mr-2" />
-                        Изпрати съобщение
-                      </>
-                    )}
-                  </Button>
+
+                  <div className="flex justify-center">
+                    <Button
+                      type="submit"
+                      className="w-auto px-8"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Изпращане...
+                        </>
+                      ) : (
+                        <>
+                          <Mail className="w-4 h-4 mr-2" />
+                          Изпрати съобщение
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </form>
               </Form>
             </CardContent>
