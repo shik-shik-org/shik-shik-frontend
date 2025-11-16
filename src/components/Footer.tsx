@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Clock, Briefcase } from 'lucide-react';
+import { MapPin, Mail, Clock, Briefcase, Facebook } from 'lucide-react';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,7 +15,6 @@ export const Footer = () => {
     <footer className="bg-card border-t border-border mt-auto">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          {/* About Section */}
           <div className="space-y-2">
             <h3 className="text-lg font-bold text-foreground">Шик Шик</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -24,7 +23,6 @@ export const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div className="space-y-2">
             <h3 className="text-base font-semibold text-foreground">Бързи връзки</h3>
             <nav className="flex flex-col space-y-1.5">
@@ -50,10 +48,18 @@ export const Footer = () => {
                 <Mail className="w-4 h-4" />
                 Свържете се с нас
               </Link>
+              <a 
+                href="https://www.facebook.com/magazini.shik.shik" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+              >
+                <Facebook className="w-4 h-4" />
+                Facebook
+              </a>
             </nav>
           </div>
 
-          {/* Contact Info */}
           <div className="space-y-2">
             <h3 className="text-base font-semibold text-foreground">Информация</h3>
             <div className="space-y-2">
@@ -75,7 +81,6 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="pt-6 border-t border-border">
           <div className="flex justify-center items-center">
             <p className="text-sm text-muted-foreground text-center">

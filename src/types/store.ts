@@ -17,4 +17,6 @@ export interface Store {
   gmaps_url?: string;
   photos: string[];
   reviews?: Review[];
+  average_rating?: number;
+  reviews_count?: number;
 }
