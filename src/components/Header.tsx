@@ -19,7 +19,8 @@ export const Header = () => {
             <img 
               src={logo} 
               alt="Шик Шик" 
-              className="h-12 md:h-16 w-auto object-contain"
+              className="h-14 md:h-16 w-auto object-contain max-w-none"
+              style={{ aspectRatio: 'auto' }}
             />
           </Link>
           
