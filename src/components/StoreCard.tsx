@@ -1,6 +1,6 @@
 import { Store } from '@/types/store';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Phone, Clock, Package, Star } from 'lucide-react';
+import { MapPin, Phone, Clock, Package, Star, StarHalf } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatHours } from '@/utils/formatHours';
 import {
@@ -49,7 +49,26 @@ export const StoreCard = ({ store }: StoreCardProps) => {
       </Carousel>
       
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg text-foreground leading-tight">{store.name}</CardTitle>
+        <div className="space-y-2">
+          <CardTitle className="text-lg text-foreground leading-tight">{store.name}</CardTitle>
+          {store.average_rating && store.reviews_count && (
+            <div className="flex items-center gap-2 text-sm">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => {
+                  const rating = store.average_rating || 0;
+                  if (i < Math.floor(rating)) {
+                    return <Star key={i} className="w-4 h-4 text-primary fill-primary" />;
+                  } else if (i < rating) {
+                    return <StarHalf key={i} className="w-4 h-4 text-primary fill-primary" />;
+                  }
+                  return <Star key={i} className="w-4 h-4 text-muted-foreground" />;
+                })}
+              </div>
+              <span className="text-foreground font-semibold">{store.average_rating.toFixed(1)}</span>
+              <span className="text-muted-foreground">({store.reviews_count} отзива)</span>
+            </div>
+          )}
+        </div>
       </CardHeader>
       <CardContent className="space-y-4 flex-1 flex flex-col">
         <div className="space-y-3 flex-1">

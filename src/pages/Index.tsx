@@ -80,7 +80,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* About Us Section */}
       <section className="bg-gradient-to-br from-primary/10 via-primary/5 to-background border-b border-primary/10">
         <div className="container mx-auto px-4 py-16 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -114,7 +113,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stores Section */}
       <main id="stores" className="container mx-auto px-4 py-12 max-w-7xl scroll-mt-20">
         <div className="space-y-8">
           <div className="text-center mb-8">
