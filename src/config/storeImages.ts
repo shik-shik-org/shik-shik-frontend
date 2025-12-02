@@ -7,11 +7,40 @@ const makeImages = (path: string, count: number): string[] =>
   );
 
 export const storeImageMapping: Record<string, string[]> = {
+
   blagoevgrad: makeImages(
     "store-images/Blagoevgrad/Todor-Alexandrov",
     10
   ),
+  Alabin: makeImages(
+    "store-images/Sofia/Alabin",
+    1
+  ),
+  Iskar: makeImages(
+    "store-images/Sofia/Iskar",
+    10
+  ),
 
+  Veslec: makeImages(
+    "store-images/Sofia/Veslec",
+    9
+  ),
+  JenskiPazar: makeImages(
+    "store-images/Sofia/Jenski-Pazar",
+    7
+  ),
+  Krasnoselo: makeImages(
+    "store-images/Sofia/Krasno-selo",
+    3
+  ),
+  MariaLuiza: makeImages(
+    "store-images/Sofia/Maria-Luiza",
+    5
+  ),
+  Nadejda: makeImages(
+    "store-images/Sofia/Nadejda",
+    8
+  ),
   Ekzarh_iosif: makeImages(
     "store-images/Pazardzhik/Ekzarh-Yosif-4",
     5
@@ -46,17 +75,57 @@ export const storeImageMapping: Record<string, string[]> = {
     "store-images/Razlog/Arhitekt-Barov-8",
     4
   ),
+  Montana25: makeImages(
+    "store-images/Montana/25",
+    2
+  ),
+  Montana65: makeImages(
+    "store-images/Montana/65",
+    3
+  ),
 };
 
 export const getStoreImages = (city: string, address: string): string[] => {
   const cityLower = (city || "").toLowerCase().trim();
   const addressLower = (address || "").toLowerCase().trim();
 
+  if (cityLower.includes("montana") || cityLower.includes("монтана")) {
+
+    if (addressLower.includes("65"))
+      return storeImageMapping.Montana65 || [];
+    if (addressLower.includes("25"))
+      return storeImageMapping.Montana25 || [];
+  }
+
   if (cityLower.includes("blagoevgrad"))
     return storeImageMapping.blagoevgrad || [];
 
   if (cityLower.includes("razlog"))
     return storeImageMapping.razlog || [];
+
+  if (cityLower.includes("sofia") || cityLower.includes("софия")) {
+
+    if (addressLower.includes("alabin") || addressLower.includes("алабин"))
+      return storeImageMapping.Alabin || [];
+
+    if (addressLower.includes("4"))
+      return storeImageMapping.Veslec || [];
+
+    if (addressLower.includes("iskar") || addressLower.includes("искар"))
+      return storeImageMapping.Iskar || [];
+
+    if (addressLower.includes("jenskipazar"))
+      return storeImageMapping.JenskiPazar || [];
+
+    if (addressLower.includes("boris"))
+      return storeImageMapping.Krasnoselo || [];
+
+    if (addressLower.includes("lomsko"))
+      return storeImageMapping.Nadejda || [];
+
+    if (addressLower.includes("luiza"))
+      return storeImageMapping.MariaLuiza || [];
+  }
 
   const isPazardzhik =
     cityLower.includes("pazardjik") ||

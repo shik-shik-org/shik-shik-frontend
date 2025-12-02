@@ -243,10 +243,10 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-foreground mb-2">Имейл</h3>
                     <a
-                      href="mailto:info@shikshik.bg"
+                      href="mailto:info@shikshik.eu"
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      info@shikshik.bg
+                      info@shikshik.eu
                     </a>
                   </div>
                 </div>
