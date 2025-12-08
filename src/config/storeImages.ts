@@ -108,7 +108,7 @@ export const getStoreImages = (city: string, address: string): string[] => {
     if (addressLower.includes("alabin"))
       return storeImageMapping.Alabin || [];
 
-    if (addressLower.includes("veslec4"))
+    if (addressLower.includes("veslec"))
       return storeImageMapping.Veslec || [];
 
     if (addressLower.includes("iskar"))
