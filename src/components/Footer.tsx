@@ -19,7 +19,7 @@ export const Footer = () => {
             <h3 className="text-lg font-bold text-foreground">Шик Шик</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Водеща верига магазини за дрехи втора употреба в България. 
-              Качествени облекла на достъпни цени с фокус върху устойчивостта.
+              Качествени облекла на достъпни цени.
             </p>
           </div>
 
@@ -67,7 +67,7 @@ export const Footer = () => {
                 <Clock className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-medium text-foreground">Работно време</p>
-                  <p>Различно за всеки магазин</p>
+                  <p>Всеки магазин има собствено работно време</p>
                 </div>
               </div>
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -84,7 +84,7 @@ export const Footer = () => {
         <div className="pt-6 border-t border-border">
           <div className="flex justify-center items-center">
             <p className="text-sm text-muted-foreground text-center">
-              © {currentYear} Шик Шик. Всички права запазени.
+              © {currentYear} Шик Шик.
             </p>
           </div>
         </div>
