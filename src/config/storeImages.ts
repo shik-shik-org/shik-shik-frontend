@@ -14,7 +14,7 @@ export const storeImageMapping: Record<string, string[]> = {
   ),
   Alabin: makeImages(
     "store-images/Sofia/Alabin",
-    1
+  4
   ),
   Iskar: makeImages(
     "store-images/Sofia/Iskar",
@@ -31,7 +31,7 @@ export const storeImageMapping: Record<string, string[]> = {
   ),
   Krasnoselo: makeImages(
     "store-images/Sofia/Krasno-selo",
-    3
+    4
   ),
   MariaLuiza: makeImages(
     "store-images/Sofia/Maria-Luiza",
