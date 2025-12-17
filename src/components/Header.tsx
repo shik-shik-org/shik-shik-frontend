@@ -20,34 +20,50 @@ export const Header = () => {
               src={logo2} 
               alt="Шик Шик" 
               className="h-14 md:h-16 w-auto object-contain max-w-none"
-              style={{ aspectRatio: 'auto' }}
             />
           </Link>
-          
-          <nav className="flex items-center gap-4 md:gap-8">
+
+          <nav className="flex items-center gap-6">
+            {/* Магазини */}
             <Link 
               to="/#stores"
               onClick={scrollToStores}
-              className="text-foreground/80 hover:text-primary font-medium transition-colors flex items-center gap-1 md:gap-2 text-sm md:text-base"
+              className="text-foreground/80 hover:text-primary font-medium transition-colors
+                         flex flex-col md:flex-row items-center gap-1 md:gap-2
+                         text-xs md:text-base"
             >
-              <MapPin className="w-4 h-4" />
-              <span className="hidden sm:inline">Магазини</span>
+              <MapPin className="w-5 h-5 md:w-4 md:h-4" />
+              <span className="md:inline text-[11px] leading-tight">
+                Магазини
+              </span>
             </Link>
+
+            {/* Кариери */}
             <NavLink 
-              to="/careers" 
-              className="text-foreground/80 hover:text-primary font-medium transition-colors flex items-center gap-1 md:gap-2 text-sm md:text-base"
+              to="/careers"
+              className="text-foreground/80 hover:text-primary font-medium transition-colors
+                         flex flex-col md:flex-row items-center gap-1 md:gap-2
+                         text-xs md:text-base"
               activeClassName="text-primary"
             >
-              <Briefcase className="w-4 h-4" />
-              <span className="hidden sm:inline">Кариери</span>
+              <Briefcase className="w-5 h-5 md:w-4 md:h-4" />
+              <span className="md:inline text-[11px] leading-tight">
+                Кариери
+              </span>
             </NavLink>
+
+            {/* Контакти */}
             <NavLink 
-              to="/contact" 
-              className="text-foreground/80 hover:text-primary font-medium transition-colors flex items-center gap-1 md:gap-2 text-sm md:text-base"
+              to="/contact"
+              className="text-foreground/80 hover:text-primary font-medium transition-colors
+                         flex flex-col md:flex-row items-center gap-1 md:gap-2
+                         text-xs md:text-base"
               activeClassName="text-primary"
             >
-              <Mail className="w-4 h-4" />
-              <span className="hidden sm:inline">Контакти</span>
+              <Mail className="w-5 h-5 md:w-4 md:h-4" />
+              <span className="md:inline text-[11px] leading-tight">
+                Контакти
+              </span>
             </NavLink>
           </nav>
         </div>
