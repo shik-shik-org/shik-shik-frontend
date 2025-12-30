@@ -18,7 +18,7 @@ export const storeImageMapping: Record<string, string[]> = {
   ),
   Iskar: makeImages(
     "store-images/Sofia/Iskar",
-    10
+    6
   ),
 
   Veslec: makeImages(
